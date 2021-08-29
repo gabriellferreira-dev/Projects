@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { FontStyles } from './styles/fontStyle';
+import 'semantic-ui-css/semantic.min.css';
+import TaskProvider from './Context/TaskProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TaskProvider>
+      <FontStyles />
+      <App />
+    </TaskProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
