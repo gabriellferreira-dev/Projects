@@ -10,8 +10,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
   body {
-    font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
-    background-color: #f0f0f0;
   }
 `;

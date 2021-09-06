@@ -1,10 +1,15 @@
 import styled from 'styled-components';
-import { Input, Button } from 'semantic-ui-react';
 
-export const StyledInput = styled(Input)({
-  fontSize: '1.6rem!important',
-})
+export const StyledInput = styled.input`
+  width: 80%;
+  outline: none;
+  border: 2px solid #2665ae8a;
+  border-radius: 3px;
+  transition: 0.3s;
 
-export const StyledButton = styled(Button)({
-  fontSize: '1.6rem!important',
-})
+  &:focus,
+  &:not(:placeholder-shown) {
+    border: 2px solid #2665ae;
+  }
+
+`;
