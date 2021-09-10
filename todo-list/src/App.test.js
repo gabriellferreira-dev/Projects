@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -26,12 +26,13 @@ test('check task has been created', () => {
   expect(getByTestId('task-0')).toBeInTheDocument();
 });
 
-test('checks if task has been removed from "to do"', () => {
+test('checks if task has been removed from "to do"', async () => {
   const { getByTestId } = renderWithRouter(<ListTasksToDo />);
   const task = getByTestId('task-0');
   userEvent.click(task);
   const markConcluded = getByTestId('mark-task-0-concluded');
   userEvent.click(markConcluded);
+  await waitForElementToBeRemoved(task);
   expect(task).not.toBeInTheDocument();
 });
 
