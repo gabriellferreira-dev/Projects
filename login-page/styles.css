@@ -196,6 +196,19 @@ main {
   transition: all 0.3s ease;
   color: #16056b;
   cursor: pointer;
+  position: relative;
+}
+
+.login-form button .spinner-container {
+  width: 30px;
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #22a6b3;
+  height: 30px;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 0 auto;
+  -webkit-animation: spinner 1s ease infinite;
+          animation: spinner 1s ease infinite;
 }
 
 .login-form button:hover {
@@ -217,5 +230,19 @@ main {
 
 .login-form p a:hover {
   text-decoration: underline;
+}
+
+@-webkit-keyframes spinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 /*# sourceMappingURL=styles.css.map */
