@@ -11,5 +11,9 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     font-size: 1.6rem;
+    background-color: #f1f1f1;
+  }
+  #root {
+    height: 100vh;
   }
 `;

@@ -1,19 +1,19 @@
 import React from 'react';
 import Header from './components/Header';
-import Input from './components/Input';
-import ListTasks from './components/ListTasks';
+import ListTasksToDo from './components/ListTasksToDo';
 import { MainContainer } from './styledComponents/Main.style';
 import { GlobalStyle } from './styles/globalStyle';
-import StatusBar from './components/StatusBar';
+import ListTasksCompleted from './components/ListTasksCompleted';
 
 function App() {
   return (
     <MainContainer>
       <GlobalStyle />
       <Header />
-      <Input />
-      <StatusBar />
-      <ListTasks />
+      <div className="lists">
+        <ListTasksToDo />
+        <ListTasksCompleted />
+      </div>
     </MainContainer>
   );
 }

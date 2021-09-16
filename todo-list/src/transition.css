@@ -1,0 +1,20 @@
+/* .item-enter {
+  left: 1000px;
+  opacity: 0;
+  transition: left 500ms ease;
+}
+.item-enter-active {
+  left: 0;
+  opacity: 1;
+  transition: left 1s, opacity 2s ease;
+}
+.item-exit {
+  left: 0;
+  opacity: 1;
+}
+.item-exit-active {
+  left: 2000px;
+  opacity: 0;
+  transition: left 1s, opacity 2s ease;
+  color: a
+} */
