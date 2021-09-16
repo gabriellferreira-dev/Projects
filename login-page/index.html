@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main>
-    <form action="" class="login-form">
-      <input type="text" class="user-email" />
-      <input type="password" class="user-password" />
-      <button class="button-login">Entrar</button>
-    </form>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main>
+      <form action="" class="login-form">
+        <div class="login-inputs-container">
+          <div>
+            <input type="text" id="user-email" placeholder="E-mail" />
+            <label for="user-email">E-mail</label>
+            <i class="fas fa-at"></i>
+          </div>
+          <div>
+            <input type="password" id="user-password" placeholder="Password" />
+            <label for="user-password">Password</label>
+            <i class="fas fa-lock"></i>
+          </div>
+        </div>
+        <div class="stay-logged-container">
+          <input type="checkbox" id="stay-logged" />
+          <label for="stay-logged">Permanecer logado</label>
+        </div>
+        <button class="button-login">Entrar</button>
+        <p>
+          Não possui cadastro? <a href="#">Clique aqui</a> para se registrar.
+        </p>
+      </form>
+    </main>
+  </body>
 </html>
