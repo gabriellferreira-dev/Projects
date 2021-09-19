@@ -15,4 +15,9 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
   }
+
+  main {
+    width: 100%;
+    height: 100vh;
+  }
 `;

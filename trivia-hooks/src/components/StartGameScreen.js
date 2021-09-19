@@ -1,46 +1,64 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { StartGame } from '../styled-components/StartGame.style';
 import fetchQuestions from '../services/fetchQuestions';
 import { GlobalContext } from '../context/GlobalContext';
-import { useContext } from 'react';
-import { useEffect } from 'react';
+import decode from '../services/decodeQuestions';
 
 export default function StartGameScreen({ redirectNextScreen, setMounted }) {
-  const { quantity, setQuestions } = useContext(GlobalContext);
+  const {
+    playerData: { quantity },
+    setQuestions,
+    playerData,
+    setPlayer,
+  } = useContext(GlobalContext);
+  const [startedGame, setStartedGame] = useState(false);
 
   const getQuestions = async () => {
+    setStartedGame(true);
     const questions = await fetchQuestions(
-      `https://opentdb.com/api.php?amount=${quantity}`
+      `https://opentdb.com/api.php?amount=${quantity}&encode=url3986`
     );
-    setQuestions(questions);
+    const decoded = decode(questions);
+    setQuestions(decoded);
+    setPlayer({ ...playerData, questions: decoded });
+    return decoded;
   };
 
   useEffect(() => {
+    console.log(playerData);
     setMounted(true);
     return function () {
       setMounted(false);
     };
-  }, [setMounted]);
+  }, [playerData, setMounted]);
+
+  if (startedGame) {
+    return <Redirect to='/game' />;
+  }
 
   return (
     <StartGame>
-      <Button
-        variant='contained'
-        color='success'
-        size='large'
-        onClick={getQuestions}
-      >
-        Start
-      </Button>
-      <Button
-        variant='outlined'
-        color='error'
-        size='large'
-        onClick={() => redirectNextScreen(false)}
-      >
-        Cancel
-      </Button>
+      <p>{`Olá, ${playerData.name}. Vamos começar?`}</p>
+      <div>
+        <Button
+          variant='contained'
+          color='success'
+          size='large'
+          onClick={getQuestions}
+        >
+          Start
+        </Button>
+        <Button
+          variant='outlined'
+          color='error'
+          size='large'
+          onClick={() => redirectNextScreen(false)}
+        >
+          Cancel
+        </Button>
+      </div>
     </StartGame>
   );
 }

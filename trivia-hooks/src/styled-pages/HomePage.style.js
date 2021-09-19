@@ -39,11 +39,6 @@ const HomePage = styled.section`
         css`
           opacity: 0;
         `}
-
-      & > button {
-        font-size: 1.8rem;
-        padding: 10px 50px;
-      }
     }
   }
 `;

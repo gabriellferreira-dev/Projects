@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
-export const QuestionInputForm = styled.div`
+export const PlayerForm = styled.div`
   flex-direction: column;
+
+  & p {
+    font-weight: 500;
+  }
+
+  & div {
+    font-size: 1.6rem;
+    & label {
+      font-size: 1.6rem;
+      color: #f3f3f3;
+    }
+  }
 
   & button {
     padding: 10px 30px;
@@ -10,8 +22,8 @@ export const QuestionInputForm = styled.div`
     background-color: #e3001a;
 
     &:hover {
-    background-color: #e3001a !important;
-    opacity: 0.8;
+      background-color: #e3001a !important;
+      opacity: 0.8;
     }
   }
 

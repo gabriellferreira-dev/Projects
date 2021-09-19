@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StyledHomePage from '../styled-pages/HomePage.style';
-import QuestionInputForm from '../components/QuestionInputForm';
+import PlayerForm from '../components/PlayerForm';
 import StartGameScreen from '../components/StartGameScreen';
 
 export default function HomePage() {
@@ -26,7 +26,7 @@ export default function HomePage() {
             redirectNextScreen={redirectNextScreen}
           />
         ) : (
-          <QuestionInputForm
+          <PlayerForm
             setMounted={setMounted}
             redirectNextScreen={redirectNextScreen}
           />
