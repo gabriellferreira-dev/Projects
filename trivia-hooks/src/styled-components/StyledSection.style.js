@@ -5,7 +5,6 @@ export const StyledSection = styled.section`
   width: 100%;
   height: calc(100% - 100px);
   align-items: center;
-  /* flex-direction: column; */
   justify-content: space-evenly;
   position: relative;
   background-color: #000119;

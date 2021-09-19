@@ -7,7 +7,7 @@ const initialPlayer = {
   answers: [],
 };
 
-const initialScore = { right: 0, wrong: 0 };
+const initialScore = { right: 0, wrong: 0, score: 0 };
 
 const TriviaProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);

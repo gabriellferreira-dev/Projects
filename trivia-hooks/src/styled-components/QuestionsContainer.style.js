@@ -23,6 +23,7 @@ export const StyledQuestionsContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   background-color: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
 
   & > p {
     font-size: 2rem;
@@ -57,24 +58,6 @@ export const StyledQuestionsContainer = styled.div`
         background-color: rgba(255, 255, 0, 0.1);
         border-color: #ffd833;
       }
-    }
-  }
-
-  & div:nth-child(4) {
-    width: 100%;
-    height: 8px;
-    background-color: rgba(0, 0, 0, 0.2);
-    bottom: 0;
-    position: absolute;
-    transition: all 30s linear;
-    /* max-width: 100; */
-
-    &::after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 1, 25, 0.2);
-      animation: ${timeOut} 30s linear;
     }
   }
 `;

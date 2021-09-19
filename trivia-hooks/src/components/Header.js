@@ -5,7 +5,7 @@ import { StyledHeader } from '../styled-components/Header.style';
 export default function Header() {
   const {
     playerData: { name },
-    scoreboard: { right, wrong },
+    scoreboard: { right, wrong, score },
   } = useContext(GlobalContext);
 
   return (
@@ -16,7 +16,7 @@ export default function Header() {
           ACERTOS<span>{right}</span>
         </p>
         <p>
-          PONTUAÇÃO<span>0</span>
+          PONTUAÇÃO<span>{score}</span>
         </p>
         <p>
           ERROS<span>{wrong}</span>

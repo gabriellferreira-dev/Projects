@@ -1,6 +1,8 @@
 import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import QuestionTimer from './QuestionTimer';
 
 export default function Question({
   question: questionData,
@@ -17,6 +19,8 @@ export default function Question({
     setScore,
   } = useContext(GlobalContext);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [isAnswered, setAnswered] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(30);
 
   useEffect(() => {
     const answersList = [...incorrect_answers, correct_answer];
@@ -28,6 +32,26 @@ export default function Question({
       }
     });
   }, [answersRef, correct_answer, incorrect_answers, question]);
+
+  const setAnsweredCallback = useCallback(() => {
+    Array.from(answersRef.current.children).forEach((element) => {
+      element.classList.add('answered');
+      element.setAttribute('disabled', true);
+    });
+    setNextButtonShow(true);
+  }, [answersRef, setNextButtonShow]);
+
+  useEffect(() => {
+    if (timeLeft !== 0) {
+      const interval = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    } else {
+      setAnsweredCallback();
+    }
+  }, [setAnsweredCallback, timeLeft]);
 
   const addAnswer = (answer) => {
     setPlayerData({
@@ -46,7 +70,11 @@ export default function Question({
 
   const updateScore = (answer) => {
     if (answer === correct_answer) {
-      setScore({ ...scoreboard, right: scoreboard.right + 1 });
+      setScore({
+        ...scoreboard,
+        right: scoreboard.right + 1,
+        score: scoreboard.score + (timeLeft + 10),
+      });
     } else {
       setScore({ ...scoreboard, wrong: scoreboard.wrong + 1 });
     }
@@ -58,12 +86,11 @@ export default function Question({
     }
     addAnswer(value);
     updateScore(value);
-    const answersButton = target.parentNode.children;
-    Array.from(answersButton).forEach((element) => {
-      element.classList.add('answered');
-      element.setAttribute('disabled', true);
-    });
+    setAnsweredCallback();
+    setAnswered(true);
   };
+
+  console.log(isAnswered);
 
   return (
     <>
@@ -82,6 +109,7 @@ export default function Question({
           </Button>
         ))}
       </div>
+      <QuestionTimer isAnswered={isAnswered} timeLeft={timeLeft} />
     </>
   );
 }
