@@ -11,18 +11,18 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
     playerData: { quantity },
     setQuestions,
     playerData,
-    setPlayer,
+    setPlayerData,
   } = useContext(GlobalContext);
   const [startedGame, setStartedGame] = useState(false);
 
   const getQuestions = async () => {
     setStartedGame(true);
     const questions = await fetchQuestions(
-      `https://opentdb.com/api.php?amount=${quantity}&encode=url3986`
+      `https://opentdb.com/api.php?amount=${Number(quantity)}&encode=url3986`
     );
     const decoded = decode(questions);
     setQuestions(decoded);
-    setPlayer({ ...playerData, questions: decoded });
+    setPlayerData({ ...playerData, questions: decoded });
     return decoded;
   };
 

@@ -35,11 +35,11 @@ const useStyles = makeStyles({
 });
 
 export default function QuestionInput({ redirectNextScreen, setMounted }) {
-  const { playerData, setPlayer } = useContext(GlobalContext);
+  const { playerData, setPlayerData } = useContext(GlobalContext);
   const classes = useStyles();
 
   const handleChange = ({ target: { value, name } }) => {
-    setPlayer({ ...playerData, [name]: value });
+    setPlayerData({ ...playerData, [name]: value });
   };
 
   useEffect(() => {
