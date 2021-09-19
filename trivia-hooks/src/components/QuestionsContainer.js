@@ -8,6 +8,7 @@ export default function QuestionsContainer() {
   const { questions } = useContext(GlobalContext);
   const [questionIndex, setQuestion] = useState(0);
   const [categoryRendered, setCategoryRendered] = useState(false);
+  const [nextButtonShow, setNextButtonShow] = useState(false);
 
   const answersRef = useRef(null);
 
@@ -34,6 +35,7 @@ export default function QuestionsContainer() {
             <Question
               question={questions[questionIndex]}
               answersRef={answersRef}
+              setNextButtonShow={setNextButtonShow}
             />
           </>
         )}
@@ -44,7 +46,9 @@ export default function QuestionsContainer() {
         onClick={() => {
           setQuestion(questionIndex + 1);
           renderCategory();
+          setNextButtonShow(false);
         }}
+        style={{ display: nextButtonShow ? 'block' : 'none' }}
       >
         Next
       </Button>

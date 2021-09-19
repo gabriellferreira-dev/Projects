@@ -22,7 +22,6 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
     );
     const decoded = decode(questions);
     setQuestions(decoded);
-    setPlayerData({ ...playerData, questions: decoded });
     return decoded;
   };
 

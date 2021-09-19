@@ -4,10 +4,8 @@ import { StyledHeader } from '../styled-components/Header.style';
 
 export default function Header() {
   const {
-    playerData: {
-      name,
-      scoreboard: { right, wrong },
-    },
+    playerData: { name },
+    scoreboard: { right, wrong },
   } = useContext(GlobalContext);
 
   return (

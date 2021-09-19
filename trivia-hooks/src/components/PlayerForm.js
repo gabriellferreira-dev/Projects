@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   root: {
-    
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: '#e3001a',
     },
@@ -16,20 +15,20 @@ const useStyles = makeStyles({
     '& .MuiInputLabel-outlined.Mui-focused': {
       color: '#f3f3f3',
     },
-    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+    '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: '#e3001aa5',
     },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: '#e3001a',
     },
-    "& .MuiOutlinedInput-input": {
+    '& .MuiOutlinedInput-input': {
       color: '#f3f3f3',
     },
-    "& .MuiInputLabel-outlined": {
+    '& .MuiInputLabel-outlined': {
       color: '#f3f3f3',
     },
-    "&:hover .MuiInputLabel-outlined": {
-      color: "red"
+    '&:hover .MuiInputLabel-outlined': {
+      color: 'red',
     },
   },
 });
@@ -55,11 +54,13 @@ export default function QuestionInput({ redirectNextScreen, setMounted }) {
       <TextField
         id='outlined-basic'
         label='Name'
-        name="name"
+        name='name'
         value={playerData.name}
         variant='outlined'
         className={classes.root}
         onChange={handleChange}
+        autoFocus={ true }
+        onBlur={() => redirectNextScreen(true)}
       />
       <p>Selecione a quantidade de perguntas</p>
       <ToggleButtonGroup
@@ -69,9 +70,15 @@ export default function QuestionInput({ redirectNextScreen, setMounted }) {
         onChange={handleChange}
         onClick={() => redirectNextScreen(true)}
       >
-        <ToggleButton name="quantity" value='5'>5</ToggleButton>
-        <ToggleButton name="quantity" value='10'>10</ToggleButton>
-        <ToggleButton name="quantity" value='15'>15</ToggleButton>
+        <ToggleButton name='quantity' value='5'>
+          5
+        </ToggleButton>
+        <ToggleButton name='quantity' value='10'>
+          10
+        </ToggleButton>
+        <ToggleButton name='quantity' value='15'>
+          15
+        </ToggleButton>
       </ToggleButtonGroup>
     </PlayerForm>
   );

@@ -3,16 +3,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 export default function Question({
+  question: questionData,
   question: { incorrect_answers, correct_answer, category, question },
   answersRef,
+  setNextButtonShow,
 }) {
   const {
     setPlayerData,
     playerData,
-    playerData: {
-      scoreboard,
-      scoreboard: { right, wrong },
-    },
+    playerData: { answers },
+    questions,
+    scoreboard,
+    setScore,
   } = useContext(GlobalContext);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
@@ -28,24 +30,34 @@ export default function Question({
   }, [answersRef, correct_answer, incorrect_answers, question]);
 
   const addAnswer = (answer) => {
-    console.log(answer);
+    setPlayerData({
+      ...playerData,
+      answers: [
+        ...answers,
+        {
+          question,
+          incorrect_answers,
+          correct_answer,
+          answer,
+        },
+      ],
+    });
+  };
+
+  const updateScore = (answer) => {
     if (answer === correct_answer) {
-      setPlayerData({
-        ...playerData,
-        rigthAnswers: [...playerData.rigthAnswers, answer],
-        scoreboard: { ...scoreboard, right: right + 1 },
-      });
+      setScore({ ...scoreboard, right: scoreboard.right + 1 });
     } else {
-      setPlayerData({
-        ...playerData,
-        wrongAnswers: [...playerData.wrongAnswers, answer],
-        scoreboard: { ...scoreboard, wrong: wrong + 1 },
-      });
+      setScore({ ...scoreboard, wrong: scoreboard.wrong + 1 });
     }
   };
 
   const handleClick = ({ target, target: { value } }) => {
+    if (questions[questions.length - 1] !== questionData) {
+      setNextButtonShow(true);
+    }
     addAnswer(value);
+    updateScore(value);
     const answersButton = target.parentNode.children;
     Array.from(answersButton).forEach((element) => {
       element.classList.add('answered');
@@ -65,7 +77,6 @@ export default function Question({
             className={answer === correct_answer ? 'correct' : 'incorrect'}
             variant='outlined'
             onClick={handleClick}
-            // disabled={isAnswered}
           >
             {answer}
           </Button>
