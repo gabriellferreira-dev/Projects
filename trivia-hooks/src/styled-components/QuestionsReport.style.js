@@ -8,6 +8,7 @@ align-items: center;
 
 & .MuiBox-root {
   width: 50%;
+  min-width: 400px;
   background-color: #f3f3f3;
   padding: 10px;
   border-radius: 10px;

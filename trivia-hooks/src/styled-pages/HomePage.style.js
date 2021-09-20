@@ -41,6 +41,36 @@ const HomePage = styled.section`
         `}
     }
   }
+
+  & > div {
+    color: #f3f3f3;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+
+    & > div {
+      max-width: 0;
+      overflow: hidden;
+      transition: all 0.2s ease;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 0;
+      border-radius: 2px;
+
+      & > div {
+        min-width: 205px;
+      }
+      
+      ${({ open }) =>
+        open &&
+        css`
+          max-width: 250px;
+          padding: 5px;
+        `}
+    }
+  }
 `;
 
 export default HomePage;

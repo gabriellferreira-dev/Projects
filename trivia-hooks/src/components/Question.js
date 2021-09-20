@@ -34,6 +34,24 @@ export default function Question({
     volume: 0.2,
   });
 
+  const { answers } = playerData;
+
+  // Update current player in storage
+  useEffect(() => {
+    console.log('aqyu')
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
+    let player;
+
+    if (gameHistory) {
+      player = gameHistory[gameHistory.length - 1];
+      const playerIndex = gameHistory.findIndex((item) => item === player);
+      player = { ...player, answers, scoreboard };
+      gameHistory[playerIndex] = player;
+
+      localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    }
+  }, [answers, scoreboard]);
+
   useEffect(() => {
     const answersList = [...incorrect_answers, correct_answer];
     setShuffledAnswers(answersList.sort(() => Math.random() - 0.5));
