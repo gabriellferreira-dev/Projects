@@ -62,4 +62,9 @@ export const StyledFeedback = styled.section`
       text-align: center;
     }
   }
+  & div:nth-child(2) {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+  }
 `;

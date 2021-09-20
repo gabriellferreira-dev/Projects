@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 const initialPlayer = {
@@ -14,6 +14,15 @@ const TriviaProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [playerData, setPlayerData] = useState(initialPlayer);
   const [scoreboard, setScore] = useState(initialScore);
+  const [isNewGame, setNewGame] = useState(false);
+
+  useEffect(() => {
+    if (isNewGame) {
+      setPlayerData(initialPlayer);
+      setScore(initialScore);
+      setNewGame(false);
+    }
+  }, [isNewGame])
 
   return (
     <GlobalContext.Provider
@@ -24,6 +33,8 @@ const TriviaProvider = ({ children }) => {
         setPlayerData,
         scoreboard,
         setScore,
+        setNewGame,
+        isNewGame
       }}
     >
       {children}
