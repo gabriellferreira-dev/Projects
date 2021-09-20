@@ -15,13 +15,8 @@ export default function Question({
   answersRef,
   setNextButtonShow,
 }) {
-  const {
-    setPlayerData,
-    playerData,
-    questions,
-    scoreboard,
-    setScore,
-  } = useContext(GlobalContext);
+  const { setPlayerData, playerData, questions, scoreboard, setScore } =
+    useContext(GlobalContext);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [isAnswered, setAnswered] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
@@ -38,7 +33,7 @@ export default function Question({
 
   // Update current player in storage
   useEffect(() => {
-    console.log('aqyu')
+    console.log('aqyu');
     const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
     let player;
 
@@ -99,15 +94,23 @@ export default function Question({
       setNextButtonShow(true);
       addAnswer();
       wrongAnswerPlay();
+      setScore({ ...scoreboard, wrong: scoreboard.wrong + 1 });
     }
-  }, [addAnswer, setAnsweredCallback, setNextButtonShow, timeLeft, wrongAnswerPlay]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    addAnswer,
+    setAnsweredCallback,
+    setNextButtonShow,
+    timeLeft,
+    wrongAnswerPlay,
+  ]);
 
   useEffect(() => {
     if (questions[questions.length - 1] === questionData && isAnswered) {
       setTimeout(() => {
         setEndGame(true);
         gameOverPlay();
-      }, 3000)
+      }, 3000);
       setTimeout(() => {
         setRedirect(true);
       }, 6000);
@@ -147,7 +150,7 @@ export default function Question({
     } else {
       wrongAnswerPlay();
     }
-    
+
     addAnswer(value);
     updateScore(value);
     setAnsweredCallback();
