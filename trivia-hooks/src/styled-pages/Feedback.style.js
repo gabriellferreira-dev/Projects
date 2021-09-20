@@ -12,7 +12,6 @@ export const StyledFeedback = styled.section`
   min-height: 300px;
 
   & div:nth-child(1) {
-    /* text-align: center; */
     background-color: rgba(227, 0, 26, 0.2);
     display: flex;
     align-items: center;
@@ -60,7 +59,7 @@ export const StyledFeedback = styled.section`
     & > span {
       font-size: 4rem;
       font-weight: bold;
+      text-align: center;
     }
   }
-  
 `;

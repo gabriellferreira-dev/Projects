@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 
 const loaderAnimation = keyframes`
   0% {
-    transform: scale(30);
+    transform: scale(4);
     opacity: 1;
   }
   100% {
@@ -22,7 +22,6 @@ export const Loader = styled.div`
   height: 100%;
   
    & div {
-    transform: scale(2);
     animation: ${loaderAnimation} 1s linear infinite;
   }
 `;
