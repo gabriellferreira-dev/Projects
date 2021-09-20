@@ -15,17 +15,16 @@ const TriviaProvider = ({ children }) => {
   const [scoreboard, setScore] = useState(initialScore);
 
   useEffect(() => {
-    console.log(playerData);
     const storagePlayer = JSON.parse(localStorage.getItem('player'));
     if (storagePlayer) {
       localStorage.setItem(
         'player',
-        JSON.stringify({ ...storagePlayer, ...playerData })
+        JSON.stringify({ ...storagePlayer, ...playerData, scoreboard })
       );
     } else {
-      localStorage.setItem('player', JSON.stringify(playerData));
+      localStorage.setItem('player', JSON.stringify({...playerData, scoreboard}));
     }
-  }, [playerData]);
+  }, [playerData, scoreboard]);
 
   return (
     <GlobalContext.Provider

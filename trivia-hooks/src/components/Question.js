@@ -1,8 +1,13 @@
 import { Button } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
-import { useCallback } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
+import { Redirect } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
 import QuestionTimer from './QuestionTimer';
+import useSound from 'use-sound';
+import gamerOverEffect from '../sound-effects/game-over.wav';
+import timerEffect from '../sound-effects/timer.wav';
+import correctAnswerEffect from '../sound-effects/correct-answer.wav';
+import wrongAnswerEffect from '../sound-effects/wrong-answer.wav';
 
 export default function Question({
   question: questionData,
@@ -13,7 +18,6 @@ export default function Question({
   const {
     setPlayerData,
     playerData,
-    playerData: { answers },
     questions,
     scoreboard,
     setScore,
@@ -21,6 +25,14 @@ export default function Question({
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [isAnswered, setAnswered] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
+  const [endGame, setEndGame] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [gameOverPlay] = useSound(gamerOverEffect, { volume: 0.5 });
+  const [wrongAnswerPlay] = useSound(wrongAnswerEffect, { volume: 0.5 });
+  const [correctAnswerPlay] = useSound(correctAnswerEffect, { volume: 0.5 });
+  const [timerPlay, { stop: stopTimerEffect }] = useSound(timerEffect, {
+    volume: 0.2,
+  });
 
   useEffect(() => {
     const answersList = [...incorrect_answers, correct_answer];
@@ -31,15 +43,31 @@ export default function Question({
         answer.classList.remove('answered');
       }
     });
-  }, [answersRef, correct_answer, incorrect_answers, question]);
+  }, [answersRef, correct_answer, incorrect_answers]);
 
   const setAnsweredCallback = useCallback(() => {
     Array.from(answersRef.current.children).forEach((element) => {
       element.classList.add('answered');
       element.setAttribute('disabled', true);
     });
-    setNextButtonShow(true);
-  }, [answersRef, setNextButtonShow]);
+    setAnswered(true);
+  }, [answersRef]);
+
+  const addAnswer = useCallback((answer = '') => {
+    setPlayerData({
+      ...playerData,
+      answers: [
+        ...playerData.answers,
+        {
+          question,
+          incorrect_answers,
+          correct_answer,
+          answer,
+        },
+      ],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (timeLeft !== 0) {
@@ -50,23 +78,33 @@ export default function Question({
       return () => clearInterval(interval);
     } else {
       setAnsweredCallback();
+      addAnswer();
     }
-  }, [setAnsweredCallback, timeLeft]);
+  }, [addAnswer, setAnsweredCallback, timeLeft]);
 
-  const addAnswer = (answer) => {
-    setPlayerData({
-      ...playerData,
-      answers: [
-        ...answers,
-        {
-          question,
-          incorrect_answers,
-          correct_answer,
-          answer,
-        },
-      ],
-    });
-  };
+  useEffect(() => {
+    if (questions[questions.length - 1] === questionData && isAnswered) {
+      setTimeout(() => {
+        setEndGame(true);
+        gameOverPlay();
+      }, 3000)
+      setTimeout(() => {
+        setRedirect(true);
+      }, 6000);
+    }
+    if (isAnswered) {
+      stopTimerEffect();
+    } else {
+      timerPlay();
+    }
+  }, [
+    gameOverPlay,
+    isAnswered,
+    questionData,
+    questions,
+    stopTimerEffect,
+    timerPlay,
+  ]);
 
   const updateScore = (answer) => {
     if (answer === correct_answer) {
@@ -80,20 +118,27 @@ export default function Question({
     }
   };
 
-  const handleClick = ({ target, target: { value } }) => {
+  const handleClick = ({ target: { value } }) => {
     if (questions[questions.length - 1] !== questionData) {
       setNextButtonShow(true);
     }
+    if (value === correct_answer) {
+      correctAnswerPlay();
+    } else {
+      wrongAnswerPlay();
+    }
+    
     addAnswer(value);
     updateScore(value);
     setAnsweredCallback();
     setAnswered(true);
   };
 
-  console.log(isAnswered);
+  if (redirect) return <Redirect to='/feedback' />;
 
   return (
     <>
+      {endGame && <div>FIM DE JOGO!</div>}
       <span>{category}</span>
       <p>{question}</p>
       <div ref={answersRef}>

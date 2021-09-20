@@ -1,7 +1,10 @@
 import styled, { keyframes, css } from 'styled-components';
 
 const circleAnimation = keyframes`
-  to {
+  0% {
+    stroke: white;
+  }
+  100% {
     stroke: red;
   }
 `;

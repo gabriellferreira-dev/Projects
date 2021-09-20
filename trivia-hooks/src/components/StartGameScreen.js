@@ -11,7 +11,6 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
     playerData: { quantity },
     setQuestions,
     playerData,
-    setPlayerData,
   } = useContext(GlobalContext);
   const [startedGame, setStartedGame] = useState(false);
 
@@ -26,7 +25,6 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
   };
 
   useEffect(() => {
-    console.log(playerData);
     setMounted(true);
     return function () {
       setMounted(false);

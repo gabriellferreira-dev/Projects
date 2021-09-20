@@ -1,17 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const timeOut = keyframes`
-  0% {
-    max-width: 100%;
-    background-color: green;
-  }
-  50% {
-  }
-  100% {
-    max-width: 0;
-    background-color: red;
-  }
-`;
+import styled from 'styled-components';
 
 export const StyledQuestionsContainer = styled.div`
   width: 60%;
@@ -34,6 +21,18 @@ export const StyledQuestionsContainer = styled.div`
   & div {
     display: flex;
     flex-direction: column;
+
+    &:nth-child(1) {
+      background-color: rgba(0, 1, 25, 0.95);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      font-size: 4rem;
+    }
 
     & .incorrect.answered {
       border-color: red !important;

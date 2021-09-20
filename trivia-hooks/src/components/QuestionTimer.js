@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { StyledQuestionTimer } from '../styled-components/QuestionTimer.styled';
 
 export default function QuestionTimer({ isAnswered, timeLeft }) {
