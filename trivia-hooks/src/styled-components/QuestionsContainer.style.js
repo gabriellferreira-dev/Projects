@@ -11,6 +11,7 @@ export const StyledQuestionsContainer = styled.div`
   justify-content: space-evenly;
   background-color: rgba(255, 255, 255, 0.05);
   overflow: hidden;
+  padding: 10px;
 
   & > p {
     font-size: 2rem;

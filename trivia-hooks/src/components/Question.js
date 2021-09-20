@@ -96,9 +96,11 @@ export default function Question({
       return () => clearInterval(interval);
     } else {
       setAnsweredCallback();
+      setNextButtonShow(true);
       addAnswer();
+      wrongAnswerPlay();
     }
-  }, [addAnswer, setAnsweredCallback, timeLeft]);
+  }, [addAnswer, setAnsweredCallback, setNextButtonShow, timeLeft, wrongAnswerPlay]);
 
   useEffect(() => {
     if (questions[questions.length - 1] === questionData && isAnswered) {
