@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function Header() {
   const {
     playerData: { name },
-    scoreboard: { right, wrong, score },
+    scoreboard: { right, wrong },
   } = useContext(GlobalContext);
 
   return (

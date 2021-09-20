@@ -14,4 +14,20 @@ export const StartGame = styled.div`
       padding: 10px 50px;
     }
   }
+
+  & .MuiFormGroup-root {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: fit-content;
+    
+    & svg {
+      font-size: 1.8rem;
+      color: #ffd833;
+    }
+
+    & span {
+      font-size: 1.6rem;
+    }
+  }
 `;
