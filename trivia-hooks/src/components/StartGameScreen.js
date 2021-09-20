@@ -8,7 +8,7 @@ import decode from '../services/decodeQuestions';
 
 export default function StartGameScreen({ redirectNextScreen, setMounted }) {
   const {
-    playerData: { quantity },
+    quantity,
     scoreboard,
     setQuestions,
     playerData,

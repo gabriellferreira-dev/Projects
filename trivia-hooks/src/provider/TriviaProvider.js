@@ -4,7 +4,6 @@ import { GlobalContext } from '../context/GlobalContext';
 const initialPlayer = {
   id: 0,
   name: '',
-  quantity: '',
   answers: [],
 };
 
@@ -15,6 +14,7 @@ const TriviaProvider = ({ children }) => {
   const [playerData, setPlayerData] = useState(initialPlayer);
   const [scoreboard, setScore] = useState(initialScore);
   const [isNewGame, setNewGame] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     if (isNewGame) {
@@ -22,7 +22,7 @@ const TriviaProvider = ({ children }) => {
       setScore(initialScore);
       setNewGame(false);
     }
-  }, [isNewGame])
+  }, [isNewGame]);
 
   return (
     <GlobalContext.Provider
@@ -31,10 +31,12 @@ const TriviaProvider = ({ children }) => {
         setQuestions,
         playerData,
         setPlayerData,
+        quantity,
+        setQuantity,
         scoreboard,
         setScore,
         setNewGame,
-        isNewGame
+        isNewGame,
       }}
     >
       {children}

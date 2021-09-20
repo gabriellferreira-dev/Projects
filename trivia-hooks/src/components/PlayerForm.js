@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 });
 
 export default function QuestionInput({ redirectNextScreen, setMounted }) {
-  const { playerData, setPlayerData } = useContext(GlobalContext);
+  const { playerData, setPlayerData, quantity, setQuantity } = useContext(GlobalContext);
   const classes = useStyles();
 
   const handleChange = ({ target: { value, name } }) => {
@@ -59,15 +59,15 @@ export default function QuestionInput({ redirectNextScreen, setMounted }) {
         variant='outlined'
         className={classes.root}
         onChange={handleChange}
-        autoFocus={ true }
+        autoFocus={true}
         onBlur={() => redirectNextScreen(true)}
       />
       <p>Selecione a quantidade de perguntas</p>
       <ToggleButtonGroup
         color='primary'
-        value={playerData.quantity}
+        value={quantity}
         exclusive
-        onChange={handleChange}
+        onChange={({ target: { value } }) => setQuantity(value)}
         onClick={() => redirectNextScreen(true)}
       >
         <ToggleButton name='quantity' value='5'>

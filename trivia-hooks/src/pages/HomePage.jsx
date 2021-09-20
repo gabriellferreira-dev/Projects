@@ -14,7 +14,7 @@ const StyledHistoryIcon = styled(HistoryIcon)`
 `;
 
 export default function HomePage() {
-  const { playerData } = useContext(GlobalContext);
+  const { playerData, quantity } = useContext(GlobalContext);
   const [nextScreen, setNextScreen] = useState(false);
   const [nextActive, setNextActive] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -22,7 +22,7 @@ export default function HomePage() {
   const [openModal, setOpenModal] = useState(false);
 
   const redirectNextScreen = (isNext) => {
-    if (playerData.name) {
+    if (playerData.name && quantity) {
       setNextActive(true);
       setMounted(false);
       setTimeout(() => {
@@ -31,6 +31,11 @@ export default function HomePage() {
       }, 1000);
     }
   };
+
+  useEffect(() => {
+    redirectNextScreen(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playerData.name, quantity]);
 
   useEffect(() => {
     const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
@@ -66,7 +71,7 @@ export default function HomePage() {
           />
         )}
       </form>
-      <HistoryGame openModal={{openModal, setOpenModal}} />
+      <HistoryGame openModal={{ openModal, setOpenModal }} />
     </StyledHomePage>
   );
 }

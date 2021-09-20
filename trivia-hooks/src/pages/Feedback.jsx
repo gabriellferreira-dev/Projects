@@ -33,7 +33,7 @@ const StyledButtonNewGame = styled(Button)`
 export default function Feedback() {
   const {
     scoreboard: { right, wrong },
-    playerData: { quantity },
+    quantity,
     setNewGame,
     isNewGame,
   } = useContext(GlobalContext);
