@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.js": "/trivia-hooks/static/js/main.53eccfe7.chunk.js",
+    "main.js.map": "/trivia-hooks/static/js/main.53eccfe7.chunk.js.map",
+    "runtime-main.js": "/trivia-hooks/static/js/runtime-main.25862c35.js",
+    "runtime-main.js.map": "/trivia-hooks/static/js/runtime-main.25862c35.js.map",
+    "static/js/2.f39ce45e.chunk.js": "/trivia-hooks/static/js/2.f39ce45e.chunk.js",
+    "static/js/2.f39ce45e.chunk.js.map": "/trivia-hooks/static/js/2.f39ce45e.chunk.js.map",
+    "static/js/3.075559f9.chunk.js": "/trivia-hooks/static/js/3.075559f9.chunk.js",
+    "static/js/3.075559f9.chunk.js.map": "/trivia-hooks/static/js/3.075559f9.chunk.js.map",
+    "static/js/4.3a298b5c.chunk.js": "/trivia-hooks/static/js/4.3a298b5c.chunk.js",
+    "static/js/4.3a298b5c.chunk.js.map": "/trivia-hooks/static/js/4.3a298b5c.chunk.js.map",
+    "index.html": "/trivia-hooks/index.html",
+    "static/js/2.f39ce45e.chunk.js.LICENSE.txt": "/trivia-hooks/static/js/2.f39ce45e.chunk.js.LICENSE.txt",
+    "static/js/3.075559f9.chunk.js.LICENSE.txt": "/trivia-hooks/static/js/3.075559f9.chunk.js.LICENSE.txt",
+    "static/media/correct-answer.c35664ce.wav": "/trivia-hooks/static/media/correct-answer.c35664ce.wav",
+    "static/media/drums-appear.397db652.wav": "/trivia-hooks/static/media/drums-appear.397db652.wav",
+    "static/media/game-over.97b8c97e.wav": "/trivia-hooks/static/media/game-over.97b8c97e.wav",
+    "static/media/reveal.a8f44054.wav": "/trivia-hooks/static/media/reveal.a8f44054.wav",
+    "static/media/start-game-countdown.f89c5fa1.wav": "/trivia-hooks/static/media/start-game-countdown.f89c5fa1.wav",
+    "static/media/timer.ff163f02.wav": "/trivia-hooks/static/media/timer.ff163f02.wav",
+    "static/media/wrong-answer.88943cf4.wav": "/trivia-hooks/static/media/wrong-answer.88943cf4.wav"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.25862c35.js",
+    "static/js/2.f39ce45e.chunk.js",
+    "static/js/main.53eccfe7.chunk.js"
+  ]
+}
