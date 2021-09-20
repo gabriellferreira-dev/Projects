@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import { StyledHeader } from '../styled-components/Header.style';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Header() {
   const {
@@ -10,17 +12,16 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <p>{`PLAYER: ${name.toUpperCase()}`}</p>
       <div>
-        <p>
-          ACERTOS<span>{right}</span>
-        </p>
-        <p>
-          PONTUAÇÃO<span>{score}</span>
-        </p>
-        <p>
-          ERROS<span>{wrong}</span>
-        </p>
+        <p>{`PLAYER: ${name.toUpperCase()}`}</p>
+        <div>
+          <p>
+            <CheckIcon /><span>{right}</span>
+          </p>
+          <p>
+            <CloseIcon /><span>{wrong}</span>
+          </p>
+        </div>
       </div>
     </StyledHeader>
   );
