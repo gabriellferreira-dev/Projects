@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 const initialPlayer = {
+  id: 0,
   name: '',
   quantity: '',
   answers: [],
@@ -14,17 +15,22 @@ const TriviaProvider = ({ children }) => {
   const [playerData, setPlayerData] = useState(initialPlayer);
   const [scoreboard, setScore] = useState(initialScore);
 
+  const { answers } = playerData;
+
+  // Update current player in storage
   useEffect(() => {
-    const storagePlayer = JSON.parse(localStorage.getItem('player'));
-    if (storagePlayer) {
-      localStorage.setItem(
-        'player',
-        JSON.stringify({ ...storagePlayer, ...playerData, scoreboard })
-      );
-    } else {
-      localStorage.setItem('player', JSON.stringify({...playerData, scoreboard}));
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
+    let player;
+
+    if (gameHistory) {
+      player = gameHistory[gameHistory.length - 1];
+      const playerIndex = gameHistory.findIndex((item) => item === player);
+      player = { ...player, answers, scoreboard };
+      gameHistory[playerIndex] = player;
+
+      localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
     }
-  }, [playerData, scoreboard]);
+  }, [answers, scoreboard]);
 
   return (
     <GlobalContext.Provider

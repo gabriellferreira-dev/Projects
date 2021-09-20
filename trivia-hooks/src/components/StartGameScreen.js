@@ -9,6 +9,7 @@ import decode from '../services/decodeQuestions';
 export default function StartGameScreen({ redirectNextScreen, setMounted }) {
   const {
     playerData: { quantity },
+    scoreboard,
     setQuestions,
     playerData,
   } = useContext(GlobalContext);
@@ -21,7 +22,32 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
     );
     const decoded = decode(questions);
     setQuestions(decoded);
-    return decoded;
+  };
+
+  const createGameStorage = () => {
+    const startedIn = new Date();
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
+    const id = gameHistory ? gameHistory[gameHistory.length - 1].id : 1;
+
+    if (gameHistory) {
+      localStorage.setItem(
+        'gameHistory',
+        JSON.stringify([
+          ...gameHistory,
+          { ...playerData, scoreboard, startedIn, id: id + 1 },
+        ])
+      );
+    } else {
+      localStorage.setItem(
+        'gameHistory',
+        JSON.stringify([{ ...playerData, scoreboard, startedIn }])
+      );
+    }
+  };
+
+  const handleClick = () => {
+    createGameStorage();
+    getQuestions();
   };
 
   useEffect(() => {
@@ -43,7 +69,7 @@ export default function StartGameScreen({ redirectNextScreen, setMounted }) {
           variant='contained'
           color='success'
           size='large'
-          onClick={getQuestions}
+          onClick={handleClick}
         >
           Start
         </Button>

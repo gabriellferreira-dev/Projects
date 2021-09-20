@@ -4,13 +4,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TriviaProvider from './provider/TriviaProvider';
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <TriviaProvider>
-        <App />
-      </TriviaProvider>
+      <SnackbarProvider maxSnack={1}>
+        <TriviaProvider>
+          <App />
+        </TriviaProvider>
+      </SnackbarProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
