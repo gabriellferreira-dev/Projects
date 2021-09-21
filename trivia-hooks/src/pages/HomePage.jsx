@@ -20,6 +20,7 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [history, setHistory] = useState([]);
 
   const redirectNextScreen = (isNext) => {
     if (playerData.name && quantity) {
@@ -34,13 +35,14 @@ export default function HomePage() {
 
   useEffect(() => {
     redirectNextScreen(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerData.name, quantity]);
 
   useEffect(() => {
     const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
 
     if (gameHistory) {
+      setHistory(gameHistory);
       setOpen(true);
       setTimeout(() => {
         setOpen(false);
@@ -50,14 +52,16 @@ export default function HomePage() {
 
   return (
     <StyledHomePage open={open} nextActive={nextActive} mounted={mounted}>
-      <div>
+      {history && (
         <div>
-          <div>Clique aqui para ver jogos anteriores</div>
+          <div>
+            <div>Clique aqui para ver jogos anteriores</div>
+          </div>
+          <IconButton onClick={() => setOpenModal(true)}>
+            <StyledHistoryIcon />
+          </IconButton>
         </div>
-        <IconButton onClick={() => setOpenModal(true)}>
-          <StyledHistoryIcon />
-        </IconButton>
-      </div>
+      )}
       <form>
         {nextScreen ? (
           <StartGameScreen
@@ -71,7 +75,7 @@ export default function HomePage() {
           />
         )}
       </form>
-      <HistoryGame openModal={{ openModal, setOpenModal }} />
+      <HistoryGame openModal={{ openModal, setOpenModal }} history={history} />
     </StyledHomePage>
   );
 }

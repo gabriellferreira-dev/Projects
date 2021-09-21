@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyledModal } from '../styled-components/QuestionsReport.style';
 import QuestionReportList from './QuestionsReportList';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,17 +7,8 @@ import { PlayerContainer } from '../styled-components/PlayerContainer.style';
 
 export default function HistoryGame({
   openModal: { openModal, setOpenModal },
+  history,
 }) {
-  const [history, setHistory] = useState([]);
-
-  useEffect(() => {
-    const gameHistory = JSON.parse(localStorage.getItem('gameHistory'));
-    setHistory(gameHistory);
-  }, []);
-
-  if (!history.length) {
-    return <p>Carregando...</p>;
-  }
 
   const toglePlayer = ({ target }) => {
     console.log(target)
